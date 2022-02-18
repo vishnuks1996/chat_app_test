@@ -1,0 +1,8 @@
+{
+    "mongo" : {
+        "host" : "localhost",
+        "port" : "27017",
+        "dbName" : "chat_app"
+    },
+    "port": 3000
+}
