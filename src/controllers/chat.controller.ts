@@ -4,6 +4,7 @@ import {
     findAll,
     findChat
 } from "../services/chat.service";
+import { CustomError } from '../interfaces/custom-error';
 
 export async function listAllChat(req: Request, res: Response, next: NextFunction) {
     let newChats: Array<object> = [];
@@ -26,7 +27,7 @@ export async function getChatById(req: Request, res: Response, next: NextFunctio
     let limit = get(req, "query.limit");
     try {
         const messages = await findChat({ chatId }, skip, limit, {});
-        if (!messages.length) return res.status(404).send({ message: 'Chat not found' });
+        if (!messages.length) throw new CustomError('Chat not found', 404);
         return res.status(200).send({ messages, message: 'Data retrieved successfully' });
     } catch (error) {
         next(error)
