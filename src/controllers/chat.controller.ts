@@ -22,9 +22,9 @@ export async function listAllChat(req: Request, res: Response, next: NextFunctio
 }
 
 export async function getChatById(req: Request, res: Response, next: NextFunction) {
-    let chatId = get(req, "params.chatId");
-    let skip = get(req, "query.skip");
-    let limit = get(req, "query.limit");
+    let chatId = get(req, "params.chatId") as string;
+    let skip = get(req, "query.skip") as number;
+    let limit = get(req, "query.limit") as number;
     try {
         const messages = await findChat({ chatId }, skip, limit, {});
         if (!messages.length) throw new CustomError('Chat not found', 404);
